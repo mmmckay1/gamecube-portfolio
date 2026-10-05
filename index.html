@@ -18,7 +18,7 @@
   <!-- ========== SCREEN 2: BOOT ANIMATION ========== -->
   <section id="boot" class="screen">
     <div class="stage"><div class="plane" id="plane"></div></div>
-    <h1 class="logo">YOUR NAME</h1>
+    <h1 class="logo">MATT MCKAY</h1>
   </section>
 
   <!-- ========== SCREEN 3: MAIN MENU ========== -->
@@ -33,7 +33,6 @@
         <div class="bob"><div class="spin" id="spin"></div></div>
       </div>
     </div>
-    <div class="hint"><span class="btn-a">A</span> Select &nbsp; <span class="btn-b">B</span> Back</div>
   </section>
 
   <!-- ========== PANELS ========== -->
@@ -67,22 +66,96 @@
   <div class="panel" id="panel-2">
     <button class="back">◀ Back</button>
     <h2>Résumé</h2>
-    <h3>Experience</h3>
-    <p><b>Job Title</b> — Company · 2023–now<br>What you did and what you achieved.</p>
-    <p><b>Job Title</b> — Company · 2020–2023<br>What you did and what you achieved.</p>
+
+    <h3>Technical Skills</h3>
+    <div class="skill-group" style="--c:#ff5ab4"><span class="label">Languages</span>
+      <span class="chip">Java</span><span class="chip">Python</span><span class="chip">SQL</span><span class="chip">JavaScript</span><span class="chip">HTML/CSS</span><span class="chip">PHP</span></div>
+    <div class="skill-group" style="--c:#2f7fff"><span class="label">Frameworks &amp; Libraries</span>
+      <span class="chip">React</span><span class="chip">NumPy</span><span class="chip">Pandas</span><span class="chip">Scikit-learn</span><span class="chip">Maven</span></div>
+    <div class="skill-group" style="--c:#1db954"><span class="label">Tools</span>
+      <span class="chip">Git</span><span class="chip">Docker</span><span class="chip">MySQL</span><span class="chip">Jupyter Notebook</span><span class="chip">Linux</span><span class="chip">Neovim</span><span class="chip">VS Code</span><span class="chip">Claude Code</span></div>
+
     <h3>Education</h3>
-    <p><b>Degree</b> — School · 2020</p>
-    <h3>Skills</h3>
-    <p>HTML · CSS · JavaScript · Figma</p>
+    <div class="edu-grid">
+      <article class="edu" style="--c:#2f7fff">
+        <div class="stat"><b>4.0</b><small>GPA</small></div>
+        <b>M.A. in Software Engineering</b>
+        <p class="where">Bellarmine University</p>
+        <span class="date">Expected Dec 2026</span>
+        <details>
+          <summary>Coursework</summary>
+          <div class="chips"><span class="chip">Data Storage Systems</span><span class="chip">Software Engineering</span><span class="chip">Architecture &amp; Operating Systems</span><span class="chip">Data Mining &amp; Machine Learning</span><span class="chip">Front-end/Back-end Development</span><span class="chip">Algorithms</span><span class="chip">System Integration &amp; Security</span></div>
+        </details>
+      </article>
+      <article class="edu" style="--c:#f2a900">
+        <div class="stat"><b>Summa</b><small>Cum Laude</small></div>
+        <b>B.M. in Instrumental Performance &amp; Jazz Studies</b>
+        <p class="where">Bellarmine University</p>
+        <span class="date">April 2020</span>
+      </article>
+    </div>
+
+    <h3>Experience</h3>
+    <div class="timeline">
+      <article class="job" style="--c:#f2a900">
+        <header><b>Graphic Production &amp; CNC Operator</b><span class="date">2023 – Present</span></header>
+        <p class="where">Environmental graphic design</p>
+        <p class="gist">Industrial CNC and laser cutting, client work, and large-format installs</p>
+        <details>
+          <summary>See more</summary>
+          <ul>
+          <li>Operated industrial CNC (Zünd) and CO2 laser (Kern) machinery, using precision software configuration, parameter tuning, and troubleshooting to maintain production schedules</li>
+          <li>Collaborated directly with clients on-site to gather requirements and ensure project accuracy</li>
+          <li>Performed large-format graphic installations, including elevated work at 30+ feet; shipped products nationally and internationally</li>
+          </ul>
+        </details>
+      </article>
+      <article class="job" style="--c:#ff5ab4">
+        <header><b>Freelance Musician &amp; Audio Engineer</b><span class="date">2016 – Present</span></header>
+        <p class="where">Self-employed</p>
+        <p class="gist">Composing and mixing in Logic Pro, live sound, and performing across the Midwest</p>
+        <details>
+          <summary>See more</summary>
+          <ul>
+          <li>Composed and mixed original soundtracks in Logic Pro for a YouTube sketch-comedy channel; managed live audio with real-time troubleshooting</li>
+          <li>Performed with Louisville jazz/funk septet Kiana &amp; the Sun Kings across the Midwest from 2017–2024</li>
+          <li>Placed 3rd in the Kentucky College Flute Competition; performed across classical, jazz, chamber, and orchestral ensembles</li>
+          </ul>
+        </details>
+      </article>
+      <article class="job" style="--c:#2f7fff">
+        <header><b>Lab Assistant I</b><span class="date">2021</span></header>
+        <p class="where">Veterinary lab</p>
+        <p class="gist">Automated lab equipment, production tracking, and troubleshooting</p>
+        <details>
+          <summary>See more</summary>
+          <ul>
+          <li>Maintained daily production spreadsheets, operated automated lab equipment (UV, sonication, DI water systems), and surpassed 4-month production goals ahead of schedule</li>
+          <li>Performed systematic troubleshooting to maintain fast-paced production; followed strict SOPs for reagent handling and quality inspection</li>
+          </ul>
+        </details>
+      </article>
+      <article class="job" style="--c:#1db954">
+        <header><b>Lead Inspector</b><span class="date">2020 – 2021</span></header>
+        <p class="where">Barrel cooperage</p>
+        <p class="gist">Led and trained a quality-control inspection team</p>
+        <details>
+          <summary>See more</summary>
+          <ul>
+          <li>Led a cross-functional inspection team across multiple stations; trained new inspectors and implemented process improvements with management</li>
+          <li>Ensured all outbound barrels met detailed quality specifications, consistently exceeding both quality and quantity benchmarks</li>
+          </ul>
+        </details>
+      </article>
+    </div>
   </div>
 
   <!-- Contact -->
   <div class="panel" id="panel-3">
     <button class="back">◀ Back</button>
     <h2>Contact</h2>
-    <p>Email: <a href="mailto:you@example.com">you@example.com</a></p>
-    <p>GitHub: <a href="https://github.com/yourname" target="_blank" rel="noopener">github.com/yourname</a></p>
-    <p>LinkedIn: <a href="https://linkedin.com/in/yourname" target="_blank" rel="noopener">linkedin.com/in/yourname</a></p>
+    <p>Email: <a href="mailto:mmmckay1@gmail.com">mmmckay1@gmail.com</a></p>
+    <p>GitHub: <a href="https://github.com/mmmckay1" target="_blank" rel="noopener">github.com/mmmckay1</a></p>
   </div>
 
   <script src="script.js"></script>

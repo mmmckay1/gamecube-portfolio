@@ -168,7 +168,7 @@ async function boot() {
 
 // ========== MAIN MENU ==========
 const spin = document.getElementById('spin');
-const big = makeCube(innerWidth < 600 ? 110 : 160);
+const big = makeCube(innerWidth < 600 ? 130 : 190);
 spin.appendChild(big);
 ['top', 'right', 'bottom', 'left'].forEach((f, i) =>
   big.querySelector('.' + f).textContent = ['ABOUT', 'PROJECTS', 'RÉSUMÉ', 'CONTACT'][i]);
