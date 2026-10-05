@@ -9,8 +9,8 @@ body {
 .screen { position: fixed; inset: 0; display: none; place-items: center; }
 .screen.active { display: grid; }
 
-.blink { letter-spacing: .4em; cursor: pointer; animation: blink 1.2s steps(2) infinite; }
-@keyframes blink { 50% { opacity: 0; } }
+.blink { letter-spacing: .4em; cursor: pointer; animation: blink 1.4s ease-in-out infinite alternate; }
+@keyframes blink { from { opacity: 1; } to { opacity: 0; } }
 
 /* ========== CUBE ========== */
 .cube { --s: 60px; width: var(--s); height: var(--s); position: relative; transform-style: preserve-3d; }
@@ -85,8 +85,8 @@ body {
 .panel summary:hover { background: #7a5cff; color: #fff; }
 .panel li { margin-bottom: 4px; }
 
-/* Résumé */
-#panel-2 h3 { margin-top: 28px; }
+/* Resume */
+#panel-3 h3 { margin-top: 28px; }
 .chip { display: inline-block; margin: 0 6px 6px 0; padding: 2px 10px; border-radius: 12px; font-size: .85em;
   border: 1px solid var(--c, #7a5cff); background: color-mix(in srgb, var(--c, #7a5cff) 18%, transparent); }
 .skill-group { margin-bottom: 8px; }
@@ -116,9 +116,9 @@ body {
 .job header { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 4px 12px;
   font-size: 1.05em; }
 .gist { margin: 6px 0 0; color: #ddd; }
-.back { background: none; border: 2px solid #7a5cff; color: #fff; border-radius: 20px;
+button.back { background: none; border: 2px solid #7a5cff; color: #fff; border-radius: 20px;
   padding: 6px 14px; font: inherit; cursor: pointer; }
-.back:hover { background: #7a5cff; }
+button.back:hover { background: #7a5cff; }
 
 .memcard { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; }
 .block { aspect-ratio: 1; border-radius: 10px; border: 2px solid #7a5cff; color: #fff; cursor: pointer;
@@ -130,10 +130,10 @@ body {
 /* ========== FLOATING BACKGROUND CUBES ========== */
 .floaty { position: fixed; top: 0; perspective: 400px; opacity: .25; pointer-events: none;
   animation: drift linear infinite; }
-.floaty .cube { animation: tumble 8s linear infinite; }
+.floaty .cube { animation: tumble 8s linear infinite; } /* speed, axis and phase set per cube in script.js */
 body:has(#start.active, #boot.active) .floaty { display: none; } /* only show them from the menu on */
 @keyframes drift  { from { transform: translateY(110vh); } to { transform: translateY(-20vh); } }
-@keyframes tumble { to { transform: rotateX(360deg) rotateY(720deg); } }
+@keyframes tumble { to { transform: rotateX(var(--rx, 360deg)) rotateY(var(--ry, 720deg)) rotateZ(var(--rz, 0deg)); } }
 
 /* ========== PHONES ========== */
 @media (max-width: 600px) {

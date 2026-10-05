@@ -37,8 +37,14 @@ const blip  = i => tone(300 + i * 40, 0, 0.12, 'triangle');
 const chime = () => [523, 659, 784, 1047].forEach((f, i) => tone(f, i * 0.08, 1.5));
 
 // ========== START ==========
-function begin() {
-  if (!ctx) ctx = new AudioContext();
+let starting = false;
+async function begin() {
+  if (starting) return; // ignore extra clicks/keys while audio wakes up
+  starting = true;
+  if (!ctx) ctx = new AudioContext({ latencyHint: 'interactive' });
+  // wait for the sound hardware to actually be running so the first blips line up with the cube
+  await ctx.resume();
+  starting = false;
   boot();
 }
 document.getElementById('start').addEventListener('click', begin);
@@ -171,7 +177,7 @@ const spin = document.getElementById('spin');
 const big = makeCube(innerWidth < 600 ? 130 : 190);
 spin.appendChild(big);
 ['top', 'right', 'bottom', 'left'].forEach((f, i) =>
-  big.querySelector('.' + f).textContent = ['ABOUT', 'PROJECTS', 'RÉSUMÉ', 'CONTACT'][i]);
+  big.querySelector('.' + f).textContent = ['ABOUT', 'PROJECTS', 'CONTACT', 'RESUME'][i]);
 big.querySelector('.front').textContent = 'YN'; // your initials
 big.querySelector('.back').textContent = '★';
 
@@ -252,6 +258,14 @@ for (let i = 0; i < 10; i++) {
   w.style.left = Math.random() * 100 + 'vw';
   w.style.animationDuration = 15 + Math.random() * 20 + 's';
   w.style.animationDelay = -Math.random() * 30 + 's';
-  w.appendChild(makeCube(14 + Math.random() * 16));
+  const c = makeCube(14 + Math.random() * 16);
+  // give each cube its own spin: random axis mix, direction, speed and starting point
+  const turns = () => (Math.floor(Math.random() * 3) - 1) * 360 + 'deg'; // -360, 0 or 360
+  c.style.setProperty('--rx', turns());
+  c.style.setProperty('--ry', (Math.random() < .5 ? -360 : 360) + 'deg');
+  c.style.setProperty('--rz', turns());
+  c.style.animationDuration = 5 + Math.random() * 9 + 's';
+  c.style.animationDelay = -Math.random() * 14 + 's';
+  w.appendChild(c);
   document.body.prepend(w);
 }
