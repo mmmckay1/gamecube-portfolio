@@ -49,25 +49,47 @@
   <!-- Projects (Memory Card style) -->
   <div class="panel" id="panel-1">
     <button class="back">◀ Back</button>
-    <h2>Memory Card in Slot A — Projects</h2>
+    <h2>Memory Cards</h2>
+    <div class="slots" role="tablist">
+      <button class="slot on" role="tab" aria-selected="true" data-slot="slot-a">Slot A — Projects</button>
+      <button class="slot" role="tab" aria-selected="false" data-slot="slot-b">Slot B — Game Saves</button>
+    </div>
+
+    <div class="slot-card" id="slot-a" role="tabpanel">
     <div class="memcard">
       <a class="block" style="--c:#ff5ab4" href="https://github.com/mmmckay1/BooButtonDesktop" target="_blank" rel="noopener"
-         data-desc="Boo Button — A desktop app: press the button and a crowd boos. Built with Electron, packaged as a Windows installer with electron-builder; a Microsoft Store listing is in progress.">
+         data-desc="A desktop app: press the button and a crowd boos. Built with Electron, packaged as a Windows installer with electron-builder; a Microsoft Store listing is in progress.">
         <b>Boo Button</b><span class="tech">JavaScript · Electron</span><small>2026</small></a>
       <a class="block" style="--c:#2f7fff" href="https://github.com/mmmckay1/SimpleEQ" target="_blank" rel="noopener"
-         data-desc="SimpleEQ — An audio equalizer plugin built while learning C++ and the JUCE audio framework.">
+         data-desc="An audio equalizer plugin built while learning C++ and the JUCE audio framework.">
         <b>SimpleEQ</b><span class="tech">C++ · JUCE</span><small>2026</small></a>
       <a class="block" style="--c:#9d7dff" href="https://github.com/The-Runtime-Terrors-CS-611/RuntimeTerrors" target="_blank" rel="noopener"
-         data-desc="Forged in Fire — Team project for CS 611 Software Engineering (team Runtime Terrors): a text-based, D&amp;D-inspired choose-your-own-adventure game with a branching story and multiple endings. Built with HTML, CSS, JavaScript and Docker.">
+         data-desc="Team project for CS 611 Software Engineering (team Runtime Terrors): a text-based, D&amp;D-inspired choose-your-own-adventure game with a branching story and multiple endings. Built with HTML, CSS, JavaScript and Docker.">
         <b>Forged in Fire</b><span class="tech">Team · HTML · JS · Docker</span><small>2026</small></a>
       <a class="block" style="--c:#1db954" href="https://github.com/mmmckay1/AnimalSim_MMM" target="_blank" rel="noopener"
-         data-desc="Animal Sim — Final project for CS 605: an animal simulation in Java using a class hierarchy, interfaces (Flyable, Swimmable, Walkable), and custom exceptions.">
+         data-desc="Final project for CS 605: an animal simulation in Java using a class hierarchy, interfaces (Flyable, Swimmable, Walkable), and custom exceptions.">
         <b>Animal Sim</b><span class="tech">Java</span><small>2025</small></a>
       <a class="block" style="--c:#f2a900" href="https://github.com/mmmckay1/gamecube-portfolio" target="_blank" rel="noopener"
-         data-desc="GameCube Portfolio — This site: a GameCube-inspired portfolio in plain HTML, CSS and JavaScript, with 3D CSS cubes and Web Audio sound.">
+         data-desc="This site: a GameCube-inspired portfolio in plain HTML, CSS and JavaScript, with 3D CSS cubes and Web Audio sound.">
         <b>This Portfolio</b><span class="tech">HTML · CSS · JavaScript</span><small>2026</small></a>
     </div>
     <p class="detail">Hover over a block for details. Click to open it on GitHub.</p>
+    </div>
+
+    <div class="slot-card" id="slot-b" role="tabpanel" hidden>
+    <div class="memcard">
+      <div class="block save" style="--c:#1db954">
+        <b>Barnyard</b><span class="tech">GameCube</span><span class="pct">70% complete</span><span class="bar"><i style="width:70%"></i></span><small>2006</small></div>
+      <div class="block save" style="--c:#f2a900">
+        <b>Madagascar</b><span class="tech">GameCube</span><span class="pct">60% complete</span><span class="bar"><i style="width:60%"></i></span><small>2005</small></div>
+      <div class="block save" style="--c:#e0322d">
+        <b>NFL Street 2</b><span class="tech">GameCube</span><span class="pct">68% complete</span><span class="bar"><i style="width:68%"></i></span><small>2004</small></div>
+      <div class="block save" style="--c:#ff7a00">
+        <b>NBA Live 2004</b><span class="tech">GameCube</span><span class="pct">76% complete</span><span class="bar"><i style="width:76%"></i></span><small>2003</small></div>
+      <div class="block save" style="--c:#00b4d8">
+        <b>SSX Tricky</b><span class="tech">GameCube</span><span class="pct">85% complete</span><span class="bar"><i style="width:85%"></i></span><small>2001</small></div>
+    </div>
+    </div>
   </div>
 
   <!-- Resume -->

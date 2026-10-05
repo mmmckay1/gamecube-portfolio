@@ -120,12 +120,22 @@ button.back { background: none; border: 2px solid #7a5cff; color: #fff; border-r
   padding: 6px 14px; font: inherit; cursor: pointer; }
 button.back:hover { background: #7a5cff; }
 
+.slots { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+.slot { background: none; border: 2px solid #3a2a80; color: #8c80b8; border-radius: 10px; padding: 8px 16px;
+  font: 700 1em "Rubik", sans-serif; letter-spacing: .05em; cursor: pointer; transition: .2s; }
+.slot:hover { color: #fff; border-color: #7a5cff; }
+.slot.on { color: #fff; border-color: #7a5cff; background: rgba(122, 92, 255, .25); box-shadow: 0 0 14px #4b33b5; }
+
 .memcard { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; }
 .panel .block { aspect-ratio: 1; border-radius: 10px; border: 2px solid #7a5cff; color: #fff; cursor: pointer;
   /* colour at the top, fading to dark behind the text at the bottom */
   background: linear-gradient(180deg, var(--c), #140c32 75%); display: grid; align-content: end;
   padding: 10px; text-align: left; font: inherit; text-decoration: none; text-shadow: 0 1px 3px rgba(0, 0, 0, .6); }
-.block:hover, .block:focus { outline: 3px solid #fff; }
+.block:not(.save):hover, .block:not(.save):focus { outline: 3px solid #fff; }
+.panel .block.save { cursor: default; }
+.save .pct { font-size: .8em; color: #ddd; }
+.save .bar { display: block; height: 5px; margin: 4px 0 6px; border-radius: 3px; background: rgba(255, 255, 255, .15); overflow: hidden; }
+.save .bar i { display: block; height: 100%; background: var(--c); }
 .block .tech { font-size: .75em; color: #ddd; }
 .detail { margin-top: 20px; color: #ddd; min-height: 3em; }
 

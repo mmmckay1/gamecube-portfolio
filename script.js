@@ -233,10 +233,30 @@ function goHome() {
 }
 document.getElementById('home').addEventListener('click', goHome);
 
+// Memory card slot tabs (Slot A = projects, Slot B = game saves)
+const slots = [...document.querySelectorAll('.slot')];
+slots.forEach(t => t.addEventListener('click', () => {
+  slots.forEach(o => {
+    const on = o === t;
+    o.classList.toggle('on', on);
+    o.setAttribute('aria-selected', on);
+    document.getElementById(o.dataset.slot).hidden = !on;
+  });
+  tone(t.dataset.slot === 'slot-a' ? hz('G4') : hz('D5'), 0, 0.12, 'triangle', 0.1);
+}));
+
+// Game saves: a fresh random completion (0-100%) on every visit
+document.querySelectorAll('.save').forEach(save => {
+  const pct = Math.floor(Math.random() * 101);
+  save.querySelector('.pct').textContent = pct + '% complete';
+  save.querySelector('.bar i').style.width = pct + '%';
+});
+
 // Memory card blocks: show description on hover/focus
-document.querySelectorAll('.block').forEach(b => {
+document.querySelectorAll('.block:not(.save)').forEach(b => {
   const showDetail = () => {
-    b.closest('.panel').querySelector('.detail').textContent = b.dataset.desc;
+    const detail = b.closest('.slot-card').querySelector('.detail');
+    if (detail && b.dataset.desc) detail.textContent = b.dataset.desc;
     tone(880, 0, 0.05, 'square', 0.04);
   };
   b.addEventListener('mouseenter', showDetail);
