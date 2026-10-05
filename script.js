@@ -243,6 +243,85 @@ document.querySelectorAll('.block').forEach(b => {
   b.addEventListener('focus', showDetail);
 });
 
+// ========== EASTER EGG: GAMEBREAKER ==========
+// Type GAMEBREAKER on the main menu, like a cheat code. A nod to NFL Street 2.
+const CODE = 'GAMEBREAKER';
+let typed = '', breaking = false;
+
+function noise(start, dur, vol) {
+  const len = ctx.sampleRate * dur, buf = ctx.createBuffer(1, len, ctx.sampleRate), d = buf.getChannelData(0);
+  for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / len) ** 2;
+  const src = ctx.createBufferSource(), g = ctx.createGain();
+  src.buffer = buf;
+  g.gain.value = vol;
+  src.connect(g).connect(ctx.destination);
+  src.start(ctx.currentTime + start);
+}
+
+function gamebreakerSound() {
+  if (!ctx) return;
+  const t = ctx.currentTime;
+  // rising whoosh
+  const w = ctx.createOscillator(), wg = ctx.createGain();
+  w.type = 'sawtooth';
+  w.frequency.setValueAtTime(110, t);
+  w.frequency.exponentialRampToValueAtTime(880, t + 0.35);
+  wg.gain.setValueAtTime(0.001, t);
+  wg.gain.exponentialRampToValueAtTime(0.07, t + 0.3);
+  wg.gain.exponentialRampToValueAtTime(0.001, t + 0.4);
+  w.connect(wg).connect(ctx.destination);
+  w.start(t); w.stop(t + 0.4);
+  // impact: noise burst + dropping kick
+  noise(0.35, 0.4, 0.25);
+  const k = ctx.createOscillator(), kg = ctx.createGain();
+  k.frequency.setValueAtTime(150, t + 0.35);
+  k.frequency.exponentialRampToValueAtTime(40, t + 0.8);
+  kg.gain.setValueAtTime(0.4, t + 0.35);
+  kg.gain.exponentialRampToValueAtTime(0.001, t + 0.9);
+  k.connect(kg).connect(ctx.destination);
+  k.start(t + 0.35); k.stop(t + 0.9);
+  // celebration stabs
+  ['G4', 'B4', 'D5', 'G5'].forEach((n, i) => tone(hz(n), 0.6 + i * 0.09, 0.2, 'square', 0.05));
+  tone(hz('G5'), 1.0, 0.9, 'square', 0.04);
+  tone(hz('D5'), 1.0, 0.9, 'square', 0.04);
+}
+
+function gamebreaker() {
+  if (breaking) return;
+  breaking = true;
+  gamebreakerSound();
+
+  const fx = document.createElement('div');
+  fx.id = 'gamebreaker';
+  fx.innerHTML = '<div class="gb-flash"></div><div class="gb-text">GAMEBREAKER!</div>';
+  ['+STYLE', '+500', '+1,000', '+250', 'SICK!', '+STYLE', '+750', 'NICE!'].forEach((p, i) => {
+    const pop = document.createElement('span');
+    pop.className = 'gb-pop';
+    pop.textContent = p;
+    pop.style.left = 8 + Math.random() * 80 + '%';
+    pop.style.top = 15 + Math.random() * 70 + '%';
+    pop.style.animationDelay = 0.5 + i * 0.12 + 's';
+    fx.appendChild(pop);
+  });
+  document.body.appendChild(fx);
+
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    // screen shake on impact
+    document.getElementById('menu').animate(
+      [0, -12, 10, -8, 6, -3, 0].map((x, i) => ({ transform: `translate(${x}px, ${i % 2 ? 6 : -6}px)` })),
+      { duration: 400, delay: 350 });
+    // the cube jukes left, right, then spins
+    big.animate([
+      { transform: 'none' },
+      { transform: 'translateX(-40px) rotateY(-30deg)', offset: 0.15 },
+      { transform: 'translateX(40px) rotateY(30deg)', offset: 0.3 },
+      { transform: 'translateX(0) rotateY(720deg)' },
+    ], { duration: 1400, easing: 'cubic-bezier(.3, .7, .4, 1)' });
+  }
+
+  setTimeout(() => { fx.remove(); breaking = false; }, 2700);
+}
+
 // ========== KEYBOARD ==========
 addEventListener('keydown', e => {
   const screen = activeScreen();
@@ -252,6 +331,10 @@ addEventListener('keydown', e => {
   // main menu
   if (e.key === 'Escape' || e.key === 'Backspace') return openIdx !== null ? closePanel() : goHome();
   if (openIdx !== null) return;
+  if (e.key.length === 1) { // track letters typed for the GAMEBREAKER code
+    typed = (typed + e.key.toUpperCase()).slice(-CODE.length);
+    if (typed === CODE) { typed = ''; gamebreaker(); }
+  }
   const dir = { ArrowUp: 0, ArrowRight: 1, ArrowDown: 2, ArrowLeft: 3 }[e.key];
   if (dir !== undefined) { e.preventDefault(); select(dir); }
   if (e.key === 'Enter') openPanel(sel);

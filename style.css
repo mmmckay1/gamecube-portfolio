@@ -129,6 +129,30 @@ button.back:hover { background: #7a5cff; }
 .block .tech { font-size: .75em; color: #ddd; }
 .detail { margin-top: 20px; color: #ddd; min-height: 3em; }
 
+/* ========== EASTER EGG: GAMEBREAKER ========== */
+#gamebreaker { position: fixed; inset: 0; z-index: 10; pointer-events: none; overflow: hidden;
+  display: grid; place-items: center; }
+.gb-flash { position: absolute; inset: 0; background: #fff; opacity: 0; animation: gb-flash .6s .35s ease-out; }
+@keyframes gb-flash { from { opacity: .9; } to { opacity: 0; } }
+.gb-text { --tilt: rotate(-6deg) skewX(-10deg);
+  font: italic 700 clamp(40px, 11vw, 140px) "Rubik", sans-serif; color: #ffd400; white-space: nowrap;
+  -webkit-text-stroke: 3px #1b1240; paint-order: stroke fill;
+  text-shadow: 6px 6px 0 #ff5ab4, 12px 12px 0 #1b1240;
+  opacity: 0; animation: gb-slam 2.3s .35s forwards; }
+@keyframes gb-slam {
+  0%   { opacity: 0; transform: var(--tilt) scale(3); animation-timing-function: cubic-bezier(.2, 1.4, .4, 1); }
+  15%  { opacity: 1; transform: var(--tilt) scale(1); }
+  80%  { opacity: 1; transform: var(--tilt) scale(1.06); }
+  100% { opacity: 0; transform: var(--tilt) scale(1.25); }
+}
+.gb-pop { position: absolute; font: italic 700 22px "Rubik", sans-serif; color: #fff; opacity: 0;
+  text-shadow: 0 0 10px #ff5ab4, 2px 2px 0 #1b1240; animation: gb-pop 1s ease-out forwards; }
+@keyframes gb-pop {
+  0%   { opacity: 0; transform: translateY(10px) scale(.6); }
+  20%  { opacity: 1; transform: none; }
+  100% { opacity: 0; transform: translateY(-60px); }
+}
+
 /* ========== FLOATING BACKGROUND CUBES ========== */
 .floaty { position: fixed; top: 0; perspective: 400px; opacity: .25; pointer-events: none;
   animation: drift linear infinite; }
