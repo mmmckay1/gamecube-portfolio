@@ -33,8 +33,15 @@ function tone(freq, start, dur, type = 'sine', vol = 0.15) {
   o.start(ctx.currentTime + start);
   o.stop(ctx.currentTime + start + dur);
 }
-const blip  = i => tone(300 + i * 40, 0, 0.12, 'triangle');
-const chime = () => [523, 659, 784, 1047].forEach((f, i) => tone(f, i * 0.08, 1.5));
+// Melody of "Giant Steps" (John Coltrane), one note per roll of the boot cube (15 rolls)
+// (concert pitch; tied notes count once, so bars 1-9 give exactly 15 attacks)
+const GIANT_STEPS = ['F#5', 'D5', 'B4', 'G4', 'Bb4', 'B4', 'A4', 'D5', 'Bb4', 'G4', 'Eb4', 'F#4',
+                     'G4', 'F4', 'Bb4'];
+const SEMI = { C: 0, 'C#': 1, Db: 1, D: 2, Eb: 3, E: 4, F: 5, 'F#': 6, G: 7, Ab: 8, A: 9, Bb: 10, B: 11 };
+const hz = n => 440 * 2 ** ((SEMI[n.slice(0, -1)] + 12 * (+n.slice(-1) + 1) - 69) / 12);
+const blip = i => tone(hz(GIANT_STEPS[(i - 1) % GIANT_STEPS.length]), 0, 0.16, 'triangle');
+// G maj7 arpeggio, the chord the Giant Steps phrase resolves to
+const chime = () => ['G4', 'B4', 'D5', 'F#5'].forEach((n, i) => tone(hz(n), i * 0.08, 1.5));
 
 // ========== START ==========
 let starting = false;
@@ -117,7 +124,7 @@ function splitM(plane) {
   copy.classList.add('right');
   document.querySelector('.stage').classList.add('split');
   tone(392, 0, 0.3, 'triangle', 0.1);
-  tone(523, 0.12, 0.4, 'triangle', 0.1);
+  tone(hz('D5'), 0.12, 0.4, 'triangle', 0.1);
 }
 
 async function boot() {
@@ -146,13 +153,12 @@ async function boot() {
 
   if (!skip) {
     addTile(group, PATH[last - 1]);
-    tone(500, 0, 0.25, 'triangle', 0.1);   // jump
-    tone(750, 0.1, 0.2, 'triangle', 0.08);
+    // the jump carries on with bar 10 of the tune: B held for the whole hop...
+    tone(hz('B4'), 0, 0.49, 'triangle', 0.12);
     await hopInto(pos, roll, PATH[last - 1], PATH[last], () => {
       addTile(group, PATH[last]).classList.add('flash');
-      tone(1400, 0, 0.04, 'square', 0.08); // punches through the floor
-      tone(600, 0, 0.35, 'sine', 0.1);
-      tone(300, 0.08, 0.35, 'sine', 0.1);
+      // ...then A as it punches through
+      tone(hz('A4'), 0, 0.3, 'triangle', 0.12);
     });
     await wait(300);
   }

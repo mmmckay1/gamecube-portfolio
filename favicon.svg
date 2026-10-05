@@ -1,22 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
-  <style>
-    rect { fill: #6a4fd8; }
-    @media (prefers-color-scheme: dark) { rect { fill: #c9bcff; } }
-  </style>
-  <rect x="0.5" y="0.5" width="9" height="9" rx="1.5"/>
-  <rect x="10.5" y="0.5" width="9" height="9" rx="1.5"/>
-  <rect x="30.5" y="0.5" width="9" height="9" rx="1.5"/>
-  <rect x="40.5" y="0.5" width="9" height="9" rx="1.5"/>
-  <rect x="0.5" y="10.5" width="9" height="9" rx="1.5"/>
-  <rect x="10.5" y="10.5" width="9" height="9" rx="1.5"/>
-  <rect x="20.5" y="10.5" width="9" height="9" rx="1.5"/>
-  <rect x="30.5" y="10.5" width="9" height="9" rx="1.5"/>
-  <rect x="40.5" y="10.5" width="9" height="9" rx="1.5"/>
-  <rect x="0.5" y="20.5" width="9" height="9" rx="1.5"/>
-  <rect x="20.5" y="20.5" width="9" height="9" rx="1.5"/>
-  <rect x="40.5" y="20.5" width="9" height="9" rx="1.5"/>
-  <rect x="0.5" y="30.5" width="9" height="9" rx="1.5"/>
-  <rect x="40.5" y="30.5" width="9" height="9" rx="1.5"/>
-  <rect x="0.5" y="40.5" width="9" height="9" rx="1.5"/>
-  <rect x="40.5" y="40.5" width="9" height="9" rx="1.5"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <g fill="none" stroke="#9d7dff" stroke-width="4" stroke-linejoin="round">
+    <path d="M32 5 57 18.5 57 46 32 59.5 7 46 7 18.5Z"/>
+    <path d="M7 18.5 32 32 57 18.5M32 32V59.5"/>
+  </g>
 </svg>
