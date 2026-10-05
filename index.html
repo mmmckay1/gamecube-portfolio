@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Your Name</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ========== SCREEN 1: PRESS START ========== -->
+  <section id="start" class="screen active">
+    <p class="blink">PRESS START</p>
+  </section>
+
+  <!-- ========== SCREEN 2: BOOT ANIMATION ========== -->
+  <section id="boot" class="screen">
+    <div class="stage"><div class="plane" id="plane"></div></div>
+    <h1 class="logo">YOUR NAME</h1>
+  </section>
+
+  <!-- ========== SCREEN 3: MAIN MENU ========== -->
+  <section id="menu" class="screen">
+    <button class="back home" id="home">◀ Home</button>
+    <div class="menu-grid">
+      <button class="opt" data-i="0" style="grid-area: top">About</button>
+      <button class="opt" data-i="1" style="grid-area: right">Projects</button>
+      <button class="opt" data-i="2" style="grid-area: bottom">Résumé</button>
+      <button class="opt" data-i="3" style="grid-area: left">Contact</button>
+      <div class="menu-stage" style="grid-area: mid">
+        <div class="bob"><div class="spin" id="spin"></div></div>
+      </div>
+    </div>
+    <div class="hint"><span class="btn-a">A</span> Select &nbsp; <span class="btn-b">B</span> Back</div>
+  </section>
+
+  <!-- ========== PANELS ========== -->
+
+  <!-- About -->
+  <div class="panel" id="panel-0">
+    <button class="back">◀ Back</button>
+    <h2>About Me</h2>
+    <p>Hi! I'm <b>Your Name</b>, a developer and designer who loves making playful things on the web.</p>
+    <p>Write a few sentences about who you are, what you do, and what you're looking for.</p>
+  </div>
+
+  <!-- Projects (Memory Card style) -->
+  <div class="panel" id="panel-1">
+    <button class="back">◀ Back</button>
+    <h2>Memory Card in Slot A — Projects</h2>
+    <div class="memcard">
+      <button class="block" style="--c:#ff5ab4" data-desc="Cool App — A delightful app. Explain what it does, your role, and the result.">
+        <b>Cool App</b><small>2026</small></button>
+      <button class="block" style="--c:#2f7fff" data-desc="Tiny Game — A browser game made for a game jam. Placed 3rd!">
+        <b>Tiny Game</b><small>2025</small></button>
+      <button class="block" style="--c:#1db954" data-desc="Pixel Zine — A 24-page zine of pixel art.">
+        <b>Pixel Zine</b><small>2025</small></button>
+      <button class="block" style="--c:#f2a900" data-desc="Design System — Components and docs used by five teams.">
+        <b>Design System</b><small>2024</small></button>
+    </div>
+    <p class="detail">Select a block…</p>
+  </div>
+
+  <!-- Résumé -->
+  <div class="panel" id="panel-2">
+    <button class="back">◀ Back</button>
+    <h2>Résumé</h2>
+    <h3>Experience</h3>
+    <p><b>Job Title</b> — Company · 2023–now<br>What you did and what you achieved.</p>
+    <p><b>Job Title</b> — Company · 2020–2023<br>What you did and what you achieved.</p>
+    <h3>Education</h3>
+    <p><b>Degree</b> — School · 2020</p>
+    <h3>Skills</h3>
+    <p>HTML · CSS · JavaScript · Figma</p>
+  </div>
+
+  <!-- Contact -->
+  <div class="panel" id="panel-3">
+    <button class="back">◀ Back</button>
+    <h2>Contact</h2>
+    <p>Email: <a href="mailto:you@example.com">you@example.com</a></p>
+    <p>GitHub: <a href="https://github.com/yourname" target="_blank" rel="noopener">github.com/yourname</a></p>
+    <p>LinkedIn: <a href="https://linkedin.com/in/yourname" target="_blank" rel="noopener">linkedin.com/in/yourname</a></p>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
