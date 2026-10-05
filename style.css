@@ -121,10 +121,12 @@ button.back { background: none; border: 2px solid #7a5cff; color: #fff; border-r
 button.back:hover { background: #7a5cff; }
 
 .memcard { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; }
-.block { aspect-ratio: 1; border-radius: 10px; border: 2px solid #7a5cff; color: #fff; cursor: pointer;
-  background: linear-gradient(135deg, var(--c), #1b1240); display: grid; align-content: end;
-  padding: 10px; text-align: left; font: inherit; }
+.panel .block { aspect-ratio: 1; border-radius: 10px; border: 2px solid #7a5cff; color: #fff; cursor: pointer;
+  /* colour at the top, fading to dark behind the text at the bottom */
+  background: linear-gradient(180deg, var(--c), #140c32 75%); display: grid; align-content: end;
+  padding: 10px; text-align: left; font: inherit; text-decoration: none; text-shadow: 0 1px 3px rgba(0, 0, 0, .6); }
 .block:hover, .block:focus { outline: 3px solid #fff; }
+.block .tech { font-size: .75em; color: #ddd; }
 .detail { margin-top: 20px; color: #ddd; min-height: 3em; }
 
 /* ========== FLOATING BACKGROUND CUBES ========== */

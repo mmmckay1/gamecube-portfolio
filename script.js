@@ -184,7 +184,7 @@ const big = makeCube(innerWidth < 600 ? 130 : 190);
 spin.appendChild(big);
 ['top', 'right', 'bottom', 'left'].forEach((f, i) =>
   big.querySelector('.' + f).textContent = ['ABOUT', 'PROJECTS', 'CONTACT', 'RESUME'][i]);
-big.querySelector('.front').textContent = 'YN'; // your initials
+big.querySelector('.front').textContent = 'MM'; // initials
 big.querySelector('.back').textContent = '★';
 
 // [rotateX, rotateY] that turns each option's face toward the viewer
