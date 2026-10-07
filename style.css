@@ -10,6 +10,11 @@ body {
 .screen.active { display: grid; }
 
 .blink { letter-spacing: .4em; cursor: pointer; animation: blink 1.4s ease-in-out infinite alternate; }
+.mute { position: fixed; top: 16px; right: 16px; z-index: 20; width: 40px; height: 40px; padding: 0;
+        font-size: 18px; line-height: 1; cursor: pointer; color: #fff;
+        background: rgba(255, 255, 255, .06); border: 1px solid rgba(185, 168, 255, .35); border-radius: 50%;
+        opacity: .6; transition: opacity .2s, background .2s; }
+.mute:hover, .mute:focus-visible { opacity: 1; background: rgba(122, 92, 255, .25); outline: none; }
 @keyframes blink { from { opacity: 1; } to { opacity: 0; } }
 
 /* ========== CUBE ========== */
@@ -126,6 +131,7 @@ button.back:hover { background: #7a5cff; }
 .slot:hover { color: #fff; border-color: #7a5cff; }
 .slot.on { color: #fff; border-color: #7a5cff; background: rgba(122, 92, 255, .25); box-shadow: 0 0 14px #4b33b5; }
 
+.slot-caption { margin: 0 0 12px; font-size: 1em; font-weight: 400; color: #ddd; letter-spacing: .05em; }
 .memcard { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; }
 .panel .block { aspect-ratio: 1; border-radius: 10px; border: 2px solid #7a5cff; color: #fff; cursor: pointer;
   /* colour at the top, fading to dark behind the text at the bottom */

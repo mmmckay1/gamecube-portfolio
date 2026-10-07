@@ -20,7 +20,9 @@ function makeCube(size = 60) {
 }
 
 // ========== SOUND ==========
-let ctx; // created on first click/key (browsers require this)
+let ctx, out; // created on first click/key (browsers require this); every sound goes through `out`
+let muted = false;
+try { muted = localStorage.getItem('muted') === '1'; } catch {}
 
 function tone(freq, start, dur, type = 'sine', vol = 0.15) {
   if (!ctx) return;
@@ -29,7 +31,7 @@ function tone(freq, start, dur, type = 'sine', vol = 0.15) {
   o.frequency.value = freq;
   g.gain.setValueAtTime(vol, ctx.currentTime + start);
   g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + start + dur);
-  o.connect(g).connect(ctx.destination);
+  o.connect(g).connect(out);
   o.start(ctx.currentTime + start);
   o.stop(ctx.currentTime + start + dur);
 }
@@ -48,13 +50,31 @@ let starting = false;
 async function begin() {
   if (starting) return; // ignore extra clicks/keys while audio wakes up
   starting = true;
-  if (!ctx) ctx = new AudioContext({ latencyHint: 'interactive' });
+  if (!ctx) {
+    ctx = new AudioContext({ latencyHint: 'interactive' });
+    out = ctx.createGain();
+    out.gain.value = muted ? 0 : 1;
+    out.connect(ctx.destination);
+  }
   // wait for the sound hardware to actually be running so the first blips line up with the cube
   await ctx.resume();
   starting = false;
   boot();
 }
 document.getElementById('start').addEventListener('click', begin);
+
+// ========== MUTE ==========
+const muteBtn = document.getElementById('mute');
+function setMuted(m) {
+  muted = m;
+  if (out) out.gain.value = m ? 0 : 1;
+  muteBtn.textContent = m ? '🔇' : '🔊';
+  muteBtn.setAttribute('aria-label', m ? 'Unmute sound' : 'Mute sound');
+  muteBtn.setAttribute('aria-pressed', m);
+  try { localStorage.setItem('muted', m ? '1' : '0'); } catch {}
+}
+setMuted(muted);
+muteBtn.addEventListener('click', e => { e.stopPropagation(); setMuted(!muted); });
 
 // ========== BOOT ANIMATION ==========
 const CELL = 60;
@@ -274,7 +294,7 @@ function noise(start, dur, vol) {
   const src = ctx.createBufferSource(), g = ctx.createGain();
   src.buffer = buf;
   g.gain.value = vol;
-  src.connect(g).connect(ctx.destination);
+  src.connect(g).connect(out);
   src.start(ctx.currentTime + start);
 }
 
@@ -289,7 +309,7 @@ function gamebreakerSound() {
   wg.gain.setValueAtTime(0.001, t);
   wg.gain.exponentialRampToValueAtTime(0.07, t + 0.3);
   wg.gain.exponentialRampToValueAtTime(0.001, t + 0.4);
-  w.connect(wg).connect(ctx.destination);
+  w.connect(wg).connect(out);
   w.start(t); w.stop(t + 0.4);
   // impact: noise burst + dropping kick
   noise(0.35, 0.4, 0.25);
@@ -298,7 +318,7 @@ function gamebreakerSound() {
   k.frequency.exponentialRampToValueAtTime(40, t + 0.8);
   kg.gain.setValueAtTime(0.4, t + 0.35);
   kg.gain.exponentialRampToValueAtTime(0.001, t + 0.9);
-  k.connect(kg).connect(ctx.destination);
+  k.connect(kg).connect(out);
   k.start(t + 0.35); k.stop(t + 0.9);
   // celebration stabs
   ['G4', 'B4', 'D5', 'G5'].forEach((n, i) => tone(hz(n), 0.6 + i * 0.09, 0.2, 'square', 0.05));
@@ -344,8 +364,12 @@ function gamebreaker() {
 
 // ========== KEYBOARD ==========
 addEventListener('keydown', e => {
+  if (e.target === muteBtn && (e.key === 'Enter' || e.key === ' ')) return; // let the button's click handle it
   const screen = activeScreen();
-  if (screen === 'start') return begin();
+  if (screen === 'start') {
+    if (e.key === 'm' || e.key === 'M') return setMuted(!muted);
+    return begin();
+  }
   if (screen === 'boot')  { skip = true; return; }
 
   // main menu
