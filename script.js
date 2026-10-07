@@ -47,20 +47,28 @@ const chime = () => ['G4', 'B4', 'D5', 'F#5'].forEach((n, i) => tone(hz(n), i * 
 
 // ========== START ==========
 let starting = false;
-async function begin() {
-  if (starting) return; // ignore extra clicks/keys while audio wakes up
-  starting = true;
+function wakeAudio() {
   if (!ctx) {
     ctx = new AudioContext({ latencyHint: 'interactive' });
     out = ctx.createGain();
     out.gain.value = muted ? 0 : 1;
     out.connect(ctx.destination);
   }
-  // wait for the sound hardware to actually be running so the first blips line up with the cube
-  await ctx.resume();
+  return ctx.resume();
+}
+async function begin() {
+  if (starting) return; // ignore extra clicks/keys while audio wakes up
+  starting = true;
+  await wakeAudio();
+  // resume() can resolve before sound is actually flowing, which swallows the first blips.
+  // Wait until the audio clock has really moved on (~50ms of rendered audio), up to 1s.
+  const t0 = ctx.currentTime, since = performance.now();
+  while (ctx.currentTime < t0 + 0.05 && performance.now() - since < 1000) await wait(10);
   starting = false;
   boot();
 }
+// pointerdown fires before click, so the audio starts waking up a little sooner
+document.getElementById('start').addEventListener('pointerdown', wakeAudio);
 document.getElementById('start').addEventListener('click', begin);
 
 // ========== MUTE ==========
