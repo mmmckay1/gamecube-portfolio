@@ -43,7 +43,7 @@ const SEMI = { C: 0, 'C#': 1, Db: 1, D: 2, Eb: 3, E: 4, F: 5, 'F#': 6, G: 7, Ab:
 const hz = n => 440 * 2 ** ((SEMI[n.slice(0, -1)] + 12 * (+n.slice(-1) + 1) - 69) / 12);
 const blip = i => tone(hz(GIANT_STEPS[(i - 1) % GIANT_STEPS.length]), 0, 0.16, 'triangle');
 // G maj7 arpeggio, the chord the Giant Steps phrase resolves to
-const chime = () => ['G4', 'B4', 'D5', 'F#5'].forEach((n, i) => tone(hz(n), i * 0.08, 1.5));
+const chime = () => ['G4', 'B4', 'D5', 'F#5'].forEach((n, i) => tone(hz(n), i * 0.08, 1.5, 'sine', 0.05));
 
 // ========== START ==========
 let starting = false;
